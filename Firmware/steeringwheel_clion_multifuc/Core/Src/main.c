@@ -143,6 +143,9 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+//      HAL_Delay(500);
+//      Tx_Flag = 1;
+//    printf("\nec200 start\n");
   }
   /* USER CODE END 3 */
 }

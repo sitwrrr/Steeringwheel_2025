@@ -46,8 +46,10 @@ set(CMAKE_ASM_TARGET_INCLUDE_PATH
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "E:/project/2025Steeringwheel/Firmware/wheel/steeringwheel_clion_multifuc/App/SLM_App.c" "CMakeFiles/Steeringwheel.elf.dir/App/SLM_App.c.obj" "gcc" "CMakeFiles/Steeringwheel.elf.dir/App/SLM_App.c.obj.d"
+  "E:/project/2025Steeringwheel/Firmware/wheel/steeringwheel_clion_multifuc/App/app_EC200.c" "CMakeFiles/Steeringwheel.elf.dir/App/app_EC200.c.obj" "gcc" "CMakeFiles/Steeringwheel.elf.dir/App/app_EC200.c.obj.d"
   "E:/project/2025Steeringwheel/Firmware/wheel/steeringwheel_clion_multifuc/App/app_can.c" "CMakeFiles/Steeringwheel.elf.dir/App/app_can.c.obj" "gcc" "CMakeFiles/Steeringwheel.elf.dir/App/app_can.c.obj.d"
   "E:/project/2025Steeringwheel/Firmware/wheel/steeringwheel_clion_multifuc/App/app_indev.c" "CMakeFiles/Steeringwheel.elf.dir/App/app_indev.c.obj" "gcc" "CMakeFiles/Steeringwheel.elf.dir/App/app_indev.c.obj.d"
+  "E:/project/2025Steeringwheel/Firmware/wheel/steeringwheel_clion_multifuc/Bsp/bsp_EC200.c" "CMakeFiles/Steeringwheel.elf.dir/Bsp/bsp_EC200.c.obj" "gcc" "CMakeFiles/Steeringwheel.elf.dir/Bsp/bsp_EC200.c.obj.d"
   "E:/project/2025Steeringwheel/Firmware/wheel/steeringwheel_clion_multifuc/Bsp/bsp_LCD.c" "CMakeFiles/Steeringwheel.elf.dir/Bsp/bsp_LCD.c.obj" "gcc" "CMakeFiles/Steeringwheel.elf.dir/Bsp/bsp_LCD.c.obj.d"
   "E:/project/2025Steeringwheel/Firmware/wheel/steeringwheel_clion_multifuc/Bsp/bsp_WS2812B.c" "CMakeFiles/Steeringwheel.elf.dir/Bsp/bsp_WS2812B.c.obj" "gcc" "CMakeFiles/Steeringwheel.elf.dir/Bsp/bsp_WS2812B.c.obj.d"
   "E:/project/2025Steeringwheel/Firmware/wheel/steeringwheel_clion_multifuc/Bsp/bsp_can.c" "CMakeFiles/Steeringwheel.elf.dir/Bsp/bsp_can.c.obj" "gcc" "CMakeFiles/Steeringwheel.elf.dir/Bsp/bsp_can.c.obj.d"

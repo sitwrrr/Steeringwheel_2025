@@ -30,8 +30,6 @@ extern uint8_t Encoder1_Counter;
 extern uint8_t Encoder2_Counter;
 extern uint8_t Encoder3_Counter;
 extern _Bool history_log_appear_flag;
-extern char history_log_str[100];
-extern char history_str[5];
 
 struct RacingCarData{
     //CAN2
@@ -40,11 +38,17 @@ struct RacingCarData{
     uint8_t PedalTravel;         //油门踏板开度    1Byte
     uint8_t brakeTravel;         //刹车踏板开度    1Byte
     uint8_t carTravel;           //车辆跑动距离    1Byte
-
-    //ID:0X213
     uint8_t gearMode;            //挡位信息  1Bit
     uint8_t angle;
-    _Bool safety_circuit_offline;
+    _Bool BSPD_Safe;
+    _Bool IMD_Safe;
+    _Bool BMS_Safe;
+    _Bool Emer_Stop;
+    _Bool Inertia_Swich;
+    _Bool Brake_Overtr_Switch;
+    _Bool HVD;
+    _Bool LMCU;
+    _Bool RMCU;
 
     //ID:0x50
     uint8_t sensor_diff;
@@ -120,8 +124,6 @@ struct RacingCarData{
 
 extern struct RacingCarData racingCarData;
 
-extern uint8_t TB_State;
-extern uint8_t TBSA_Flag;
-extern uint8_t TBSO_Flag;
+extern _Bool safety_circuit_offline;
 
 #endif

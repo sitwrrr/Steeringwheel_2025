@@ -77,6 +77,9 @@ CMakeFiles/Steeringwheel.elf.dir/Core/Src/main.c.obj: \
  E:\project\2025Steeringwheel\Firmware\wheel\steeringwheel_clion_multifuc\Core\Inc/memorymap.h \
  E:\project\2025Steeringwheel\Firmware\wheel\steeringwheel_clion_multifuc\Core\Inc/tim.h \
  E:\project\2025Steeringwheel\Firmware\wheel\steeringwheel_clion_multifuc\Core\Inc/usart.h \
+ D:\Program\ Files\STMicroelectronics\STM32CubeCLT_1.18.0\GNU-tools-for-STM32\bin\../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdio.h \
+ D:\Program\ Files\STMicroelectronics\STM32CubeCLT_1.18.0\GNU-tools-for-STM32\bin\../lib/gcc/arm-none-eabi/13.3.1/include/stdarg.h \
+ D:\Program\ Files\STMicroelectronics\STM32CubeCLT_1.18.0\GNU-tools-for-STM32\bin\../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/sys/stdio.h \
  E:\project\2025Steeringwheel\Firmware\wheel\steeringwheel_clion_multifuc\Core\Inc/gpio.h \
  E:\project\2025Steeringwheel\Firmware\wheel\steeringwheel_clion_multifuc\Core\Inc/fmc.h \
  E:\project\2025Steeringwheel\Firmware\wheel\steeringwheel_clion_multifuc\Middlewares\lvgl/lvgl.h \
@@ -93,7 +96,6 @@ CMakeFiles/Steeringwheel.elf.dir/Core/Src/main.c.obj: \
  D:\Program\ Files\STMicroelectronics\STM32CubeCLT_1.18.0\GNU-tools-for-STM32\bin\../lib/gcc/arm-none-eabi/13.3.1/include/syslimits.h \
  D:\Program\ Files\STMicroelectronics\STM32CubeCLT_1.18.0\GNU-tools-for-STM32\bin\../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/limits.h \
  D:\Program\ Files\STMicroelectronics\STM32CubeCLT_1.18.0\GNU-tools-for-STM32\bin\../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/sys/syslimits.h \
- D:\Program\ Files\STMicroelectronics\STM32CubeCLT_1.18.0\GNU-tools-for-STM32\bin\../lib/gcc/arm-none-eabi/13.3.1/include/stdarg.h \
  E:\project\2025Steeringwheel\Firmware\wheel\steeringwheel_clion_multifuc\Middlewares\lvgl/src/stdlib/lv_mem.h \
  E:\project\2025Steeringwheel\Firmware\wheel\steeringwheel_clion_multifuc\Middlewares\lvgl/src/stdlib/../lv_conf_internal.h \
  E:\project\2025Steeringwheel\Firmware\wheel\steeringwheel_clion_multifuc\Middlewares\lvgl/src/stdlib/lv_string.h \

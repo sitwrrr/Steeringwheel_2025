@@ -3,8 +3,6 @@
 
 extern osEventFlagsId_t Upld_data_eventHandle;
 
-uint8_t  data1[8] = {1,2,3,4,5,6,7,8};
-
 void Can1Filter_Config(){
     FDCAN_FilterTypeDef FDCan1_FilterStructure;
 

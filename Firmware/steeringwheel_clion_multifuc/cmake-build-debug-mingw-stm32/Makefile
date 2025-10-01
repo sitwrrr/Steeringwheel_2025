@@ -159,6 +159,30 @@ App/SLM_App.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Steeringwheel.elf.dir\build.make CMakeFiles/Steeringwheel.elf.dir/App/SLM_App.c.s
 .PHONY : App/SLM_App.c.s
 
+App/app_EC200.obj: App/app_EC200.c.obj
+.PHONY : App/app_EC200.obj
+
+# target to build an object file
+App/app_EC200.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Steeringwheel.elf.dir\build.make CMakeFiles/Steeringwheel.elf.dir/App/app_EC200.c.obj
+.PHONY : App/app_EC200.c.obj
+
+App/app_EC200.i: App/app_EC200.c.i
+.PHONY : App/app_EC200.i
+
+# target to preprocess a source file
+App/app_EC200.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Steeringwheel.elf.dir\build.make CMakeFiles/Steeringwheel.elf.dir/App/app_EC200.c.i
+.PHONY : App/app_EC200.c.i
+
+App/app_EC200.s: App/app_EC200.c.s
+.PHONY : App/app_EC200.s
+
+# target to generate assembly for a file
+App/app_EC200.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Steeringwheel.elf.dir\build.make CMakeFiles/Steeringwheel.elf.dir/App/app_EC200.c.s
+.PHONY : App/app_EC200.c.s
+
 App/app_can.obj: App/app_can.c.obj
 .PHONY : App/app_can.obj
 
@@ -206,6 +230,30 @@ App/app_indev.s: App/app_indev.c.s
 App/app_indev.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Steeringwheel.elf.dir\build.make CMakeFiles/Steeringwheel.elf.dir/App/app_indev.c.s
 .PHONY : App/app_indev.c.s
+
+Bsp/bsp_EC200.obj: Bsp/bsp_EC200.c.obj
+.PHONY : Bsp/bsp_EC200.obj
+
+# target to build an object file
+Bsp/bsp_EC200.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Steeringwheel.elf.dir\build.make CMakeFiles/Steeringwheel.elf.dir/Bsp/bsp_EC200.c.obj
+.PHONY : Bsp/bsp_EC200.c.obj
+
+Bsp/bsp_EC200.i: Bsp/bsp_EC200.c.i
+.PHONY : Bsp/bsp_EC200.i
+
+# target to preprocess a source file
+Bsp/bsp_EC200.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Steeringwheel.elf.dir\build.make CMakeFiles/Steeringwheel.elf.dir/Bsp/bsp_EC200.c.i
+.PHONY : Bsp/bsp_EC200.c.i
+
+Bsp/bsp_EC200.s: Bsp/bsp_EC200.c.s
+.PHONY : Bsp/bsp_EC200.s
+
+# target to generate assembly for a file
+Bsp/bsp_EC200.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Steeringwheel.elf.dir\build.make CMakeFiles/Steeringwheel.elf.dir/Bsp/bsp_EC200.c.s
+.PHONY : Bsp/bsp_EC200.c.s
 
 Bsp/bsp_LCD.obj: Bsp/bsp_LCD.c.obj
 .PHONY : Bsp/bsp_LCD.obj
@@ -10684,12 +10732,18 @@ help:
 	@echo ... App/SLM_App.obj
 	@echo ... App/SLM_App.i
 	@echo ... App/SLM_App.s
+	@echo ... App/app_EC200.obj
+	@echo ... App/app_EC200.i
+	@echo ... App/app_EC200.s
 	@echo ... App/app_can.obj
 	@echo ... App/app_can.i
 	@echo ... App/app_can.s
 	@echo ... App/app_indev.obj
 	@echo ... App/app_indev.i
 	@echo ... App/app_indev.s
+	@echo ... Bsp/bsp_EC200.obj
+	@echo ... Bsp/bsp_EC200.i
+	@echo ... Bsp/bsp_EC200.s
 	@echo ... Bsp/bsp_LCD.obj
 	@echo ... Bsp/bsp_LCD.i
 	@echo ... Bsp/bsp_LCD.s

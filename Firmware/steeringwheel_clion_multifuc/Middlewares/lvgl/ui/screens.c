@@ -256,7 +256,7 @@ void create_screen_main() {
             lv_obj_set_pos(obj, 60, 21);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_obj_set_style_text_font(obj, &ui_font_harmony_os_sans_regular_16, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_label_set_text(obj, "SPEED KMH");
+            lv_label_set_text(obj, "LRPM");
         }
         {
             // rmot_rpm_label
@@ -265,7 +265,7 @@ void create_screen_main() {
             lv_obj_set_pos(obj, 60, 84);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_obj_set_style_text_font(obj, &ui_font_harmony_os_sans_regular_16, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_label_set_text(obj, "SPEED KMH");
+            lv_label_set_text(obj, "RRPM");
         }
         {
             // wifi_off
@@ -441,6 +441,16 @@ void create_screen_main() {
                     lv_label_set_text(obj, "0000");
                 }
             }
+        }
+        {
+            // boot_steady
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.boot_steady = obj;
+            lv_obj_set_pos(obj, 181, 98);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_harmony_os_sans_regular_16, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_color(obj, lv_color_hex(0xffff0000), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text(obj, "ENTER BOOTLOADER");
         }
     }
     

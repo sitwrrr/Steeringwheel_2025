@@ -24,10 +24,11 @@ uint8_t Encoder1_Counter = 0;
 uint8_t Encoder2_Counter = 0;
 uint8_t Encoder3_Counter = 0;
 _Bool history_log_appear_flag = 0;
-char history_log_str[100] = "CAN Receive Wrong \nmessage:\nLMCU:000,000\nRMCU:000,000\nBMS:0,0power off cause by\n";
-char history_str[5];
 
 struct RacingCarData racingCarData;
+
+//安全回路
+_Bool safety_circuit_offline = 0;
 
 uint8_t TB_State = 0;   //1 ǰ�� 0 ����
 uint8_t TBSA_Flag = 0;

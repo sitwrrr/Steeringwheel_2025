@@ -330,5 +330,45 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 }
 
 /* USER CODE BEGIN 1 */
+#ifdef __GNUC__
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#else
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif
 
+PUTCHAR_PROTOTYPE
+{
+    if(Tx_Flag == 1)
+        HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1,HAL_MAX_DELAY);
+    else
+        HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1,HAL_MAX_DELAY);
+    return ch;
+}
+
+#ifdef __GNUC__
+#define GETCAHR_PROTOTYPE int __io_getchar(void)
+#else
+#define GETCAHR_PROTOTYPE int fgetc(FILE *f)
+#endif
+
+GETCAHR_PROTOTYPE{
+    uint8_t ch = 0;
+    HAL_UART_Receive(&huart3, &ch, 1, 0xffff);
+    return ch;
+}
+//int fputc(int ch, FILE *f)
+//{
+//    if(Tx_Flag == 1)
+//        HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1,0xFFFF);
+//    else
+//        HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1,0xFFFF);
+//    return ch;
+//}
+
+//int fgetc(FILE *f)
+//{
+//    uint8_t ch = 0;
+//    HAL_UART_Receive(&huart3, &ch, 1, 0xffff);
+//    return ch;
+//}
 /* USER CODE END 1 */

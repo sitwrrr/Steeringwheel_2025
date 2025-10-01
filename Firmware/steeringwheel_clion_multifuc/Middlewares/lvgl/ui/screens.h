@@ -55,6 +55,7 @@ typedef struct _objects_t {
     lv_obj_t *history_log_fail;
     lv_obj_t *history_log_fail_rpm_difference_label;
     lv_obj_t *history_log_rpm_difference;
+    lv_obj_t *boot_steady;
 } objects_t;
 
 extern objects_t objects;

@@ -32,6 +32,7 @@
 #include "app_indev.h"
 #include "iwdg.h"
 #include "string.h"
+#include "app_EC200.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -74,6 +75,20 @@ const osThreadAttr_t ws2812b_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
+/* Definitions for iot */
+osThreadId_t iotHandle;
+const osThreadAttr_t iot_attributes = {
+  .name = "iot",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow,
+};
+/* Definitions for iot_upload */
+osThreadId_t iot_uploadHandle;
+const osThreadAttr_t iot_upload_attributes = {
+  .name = "iot_upload",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow,
+};
 /* Definitions for lvgl_mutex */
 osMutexId_t lvgl_mutexHandle;
 const osMutexAttr_t lvgl_mutex_attributes = {
@@ -93,6 +108,8 @@ const osEventFlagsAttr_t Upld_data_event_attributes = {
 void entry_lvgl_meter(void *argument);
 void entry_lvgl(void *argument);
 void entry_ws2812b(void *argument);
+void entry_iot(void *argument);
+void entry_iot_upload(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -135,6 +152,12 @@ void MX_FREERTOS_Init(void) {
   /* creation of ws2812b */
   ws2812bHandle = osThreadNew(entry_ws2812b, NULL, &ws2812b_attributes);
 
+  /* creation of iot */
+  iotHandle = osThreadNew(entry_iot, NULL, &iot_attributes);
+
+  /* creation of iot_upload */
+  //iot_uploadHandle = osThreadNew(entry_iot_upload, NULL, &iot_upload_attributes);
+
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
@@ -169,8 +192,32 @@ void entry_lvgl_meter(void *argument)
           Key_Num_Click = key_scan_click();
           Key_Num_Press = key_scan_press();
 
+          if(racingCarData.RMCU==0)
+              safety_circuit_offline = 1;
+          else
+              safety_circuit_offline = 0;
+
+          if(racingCarData.BSPD_Safe == 0)
+              lv_label_set_text(objects.history_log_fail,"BSPD_Safe");
+          else if(racingCarData.IMD_Safe == 0)
+              lv_label_set_text(objects.history_log_fail,"IMD_Safe");
+          else if(racingCarData.BMS_Safe == 0)
+              lv_label_set_text(objects.history_log_fail,"BMS_Safe");
+          else if(racingCarData.Emer_Stop == 0)
+              lv_label_set_text(objects.history_log_fail,"Emer_Stop");
+          else if(racingCarData.Inertia_Swich == 0)
+              lv_label_set_text(objects.history_log_fail,"Inertia_Swich");                                                                                                             
+          else if(racingCarData.Brake_Overtr_Switch == 0)
+              lv_label_set_text(objects.history_log_fail,"Brake_Overtr_Switch");
+          else if(racingCarData.HVD == 0)
+              lv_label_set_text(objects.history_log_fail,"HVD");
+          else if(racingCarData.LMCU == 0)
+              lv_label_set_text(objects.history_log_fail,"LMCU");
+          else if(racingCarData.RMCU == 0)
+              lv_label_set_text(objects.history_log_fail,"RMCU");
+
           //安全回路检测
-          if(racingCarData.safety_circuit_offline == 0) {
+          if(safety_circuit_offline == 1) {
               if (saf_cir_ofl_blink<=10) {
                   lv_obj_clear_flag(objects.saf_cir_ofl_label, LV_OBJ_FLAG_HIDDEN);
                   saf_cir_ofl_blink++;
@@ -246,6 +293,9 @@ void entry_lvgl_meter(void *argument)
           lv_label_set_text_fmt(objects.motor1_temp,"%02d",racingCarData.r_motor_temp);
           lv_label_set_text_fmt(objects.mincellvolt,"%04d",racingCarData.MinCellVolt);
 
+          //测试系统bootloader IAP
+          lv_label_set_text_fmt(objects.lap,"%d",key_scan_press());
+
           lv_label_set_text_fmt(objects.bat_volt,"%03d",racingCarData.BatVoltage);
 
           lv_bar_set_value(objects.soc,racingCarData.BatSoc,LV_ANIM_OFF);
@@ -265,6 +315,7 @@ void entry_lvgl_meter(void *argument)
           else if(racingCarData.gearMode == 4){
               lv_label_set_text(objects.gear,"EF");
           }
+      //CAN1_Send(0x210,data);
 //      }
 //      osMutexRelease(lvgl_mutexHandle);
       osDelay(50);
@@ -282,6 +333,7 @@ void entry_lvgl_meter(void *argument)
 void entry_lvgl(void *argument)
 {
   /* USER CODE BEGIN entry_lvgl */
+  static uint8_t boot_steady = 0;
   /* Infinite loop */
   for(;;)
   {
@@ -289,6 +341,59 @@ void entry_lvgl(void *argument)
       uint32_t time_till_next = lv_timer_handler();
       if(time_till_next == LV_NO_TIMER_READY) time_till_next = LV_DEF_REFR_PERIOD; /*try again soon because the other thread can make the timer ready*/
       HAL_IWDG_Refresh(&hiwdg1);
+
+      if(key_scan_press() == 3){   //可以添加延时进入
+          boot_steady++;
+          lv_obj_clear_flag(objects.boot_steady,LV_OBJ_FLAG_HIDDEN);
+          if(boot_steady == 17) {
+              uint32_t i = 0;
+              void (*SysMemBootJump)(void);        /* 声明一个函数指针 */
+              __IO uint32_t BootAddr = 0x1FF09800; /* STM32H7的系统BootLoader地址 */
+
+              /* 关闭全局中断 */
+              __disable_irq(); // 关闭全局中断
+
+              /* 关闭滴答定时器，复位到默认值 */
+              SysTick->CTRL = 0;
+              SysTick->LOAD = 0;
+              SysTick->VAL = 0;
+
+              /* 设置所有时钟到默认状态，使用HSI时钟 */
+              HAL_RCC_DeInit();
+
+              /* 关闭所有中断，清除所有中断挂起标志 */
+              for (i = 0; i < 8; i++) {
+                  NVIC->ICER[i] = 0xFFFFFFFF;
+                  NVIC->ICPR[i] = 0xFFFFFFFF;
+              }
+
+              /* 使能全局中断 */
+              __enable_irq(); // 开启全局中断
+//              HAL_FLASH_Program();
+
+              /* 跳转到系统BootLoader，首地址是MSP，地址+4是复位中断服务程序地址 */
+              SysMemBootJump = (void (*)(void)) (*((uint32_t *) (BootAddr + 4)));
+
+              /* 设置主堆栈指针 */
+              __set_MSP(*(uint32_t *) BootAddr);
+
+              /* 在RTOS工程，这条语句很重要，设置为特权级模式，使用MSP指针 */
+              __set_CONTROL(0);
+
+              /* 跳转到系统BootLoader */
+              SysMemBootJump();
+
+              /* 跳转成功的话，不会执行到这里，用户可以在这里添加代码 */
+              while (1) {
+
+              }
+          }
+      }
+      else{
+          lv_obj_add_flag(objects.boot_steady,LV_OBJ_FLAG_HIDDEN);
+          boot_steady = 0;
+      }
+
       osMutexRelease(lvgl_mutexHandle);
       osDelay(time_till_next); /* delay to avoid unnecessary polling */
   }
@@ -314,10 +419,78 @@ void entry_ws2812b(void *argument)
       if(r_event) {
           RPM_LED_Shine();
       }
-
       osDelay(50);
   }
   /* USER CODE END entry_ws2812b */
+}
+
+/* USER CODE BEGIN Header_entry_iot */
+/**
+* @brief Function implementing the iot thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_entry_iot */
+void entry_iot(void *argument)
+{
+  /* USER CODE BEGIN entry_iot */
+  /* Infinite loop */
+  for(;;)
+  {
+      // event_bit = osEventFlagsWait(Upld_data_eventHandle,  //�ȴ��������ݣ��ղ����Ͳ�������һ����
+      //							GUI_UPDATE_EVENT,
+      //							osFlagsWaitAll,
+      //							osWaitForever);
+      MQTTClient_RdyFlag = EC200_MQTTInit();
+
+      if(MQTTClient_RdyFlag)
+          iot_uploadHandle = osThreadNew(entry_iot_upload, NULL, &iot_upload_attributes);
+      //lv_event_send(ui_Iot,MQTT_INIT_OK,NULL);
+      osDelay(500);
+      if(PUBOK_Flag == 1){
+          osThreadSuspend(iotHandle);
+      }
+  }
+  /* USER CODE END entry_iot */
+}
+
+/* USER CODE BEGIN Header_entry_iot_upload */
+/**
+* @brief Function implementing the iot_upload thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_entry_iot_upload */
+void entry_iot_upload(void *argument)
+{
+  /* USER CODE BEGIN entry_iot_upload */
+    uint32_t event_bit;
+  /* Infinite loop */
+  for(;;)
+  {
+      event_bit = osEventFlagsWait(Upld_data_eventHandle,
+                                   GUI_UPDATE_EVENT,
+                                   osFlagsWaitAll,
+                                   osWaitForever);
+      if(event_bit){
+          if(eTaskGetState(iotHandle) == eSuspended){
+              if(PUBOK_Flag == 1 )
+              {
+                  //	  	 if(uploadFlag)     //�ϳ���ǵý⿪
+                  //		  {
+                  Tx_Flag = 1;
+                  printf("\nuploadcardata\n");
+                  jsonPack();
+                  //		  }
+                  //		  uploadFlag = 0;
+              }
+              else
+                  osThreadResume(iotHandle);
+          }
+      }
+    osDelay(50);
+  }
+  /* USER CODE END entry_iot_upload */
 }
 
 /* Private application code --------------------------------------------------*/

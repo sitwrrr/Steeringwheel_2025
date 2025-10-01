@@ -500,4 +500,9 @@ CMakeFiles/Steeringwheel.elf.dir/Core/Src/freertos.c.obj: \
  E:\project\2025Steeringwheel\Firmware\wheel\steeringwheel_clion_multifuc\Core\Inc/iwdg.h \
  D:\Program\ Files\STMicroelectronics\STM32CubeCLT_1.18.0\GNU-tools-for-STM32\bin\../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/string.h \
  D:\Program\ Files\STMicroelectronics\STM32CubeCLT_1.18.0\GNU-tools-for-STM32\bin\../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/strings.h \
- D:\Program\ Files\STMicroelectronics\STM32CubeCLT_1.18.0\GNU-tools-for-STM32\bin\../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/sys/string.h
+ D:\Program\ Files\STMicroelectronics\STM32CubeCLT_1.18.0\GNU-tools-for-STM32\bin\../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/sys/string.h \
+ E:\project\2025Steeringwheel\Firmware\wheel\steeringwheel_clion_multifuc\App/app_EC200.h \
+ E:\project\2025Steeringwheel\Firmware\wheel\steeringwheel_clion_multifuc\Bsp/bsp_EC200.h \
+ E:\project\2025Steeringwheel\Firmware\wheel\steeringwheel_clion_multifuc\Core\Inc/usart.h \
+ D:\Program\ Files\STMicroelectronics\STM32CubeCLT_1.18.0\GNU-tools-for-STM32\bin\../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdio.h \
+ D:\Program\ Files\STMicroelectronics\STM32CubeCLT_1.18.0\GNU-tools-for-STM32\bin\../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/sys/stdio.h
