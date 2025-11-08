@@ -102,7 +102,7 @@ void decode_power(uint32_t ID,uint8_t *candata){
             break;
         case 0x186140F3:
             racingCarData.MaxCellVolt = candata[0] * 256 + candata[1];
-            racingCarData.MinCellVolt = candata[0] * 256 + candata[1];
+            racingCarData.MinCellVolt = candata[2] * 256 + candata[3];
             break;
     }
 }
